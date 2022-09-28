@@ -1,6 +1,11 @@
 const SingularProxySandbox = require('../src/SingularProxySandbox');
 
 describe('SingularProxySandbox', () => {
+  afterEach(() => {
+    delete window.fixedValue;
+    delete window.addedValue;
+  })
+
   it('激活时可以正确记录对应的值', () => {
     window.fixedValue = '原始值';
 

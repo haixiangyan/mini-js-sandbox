@@ -1,6 +1,7 @@
 class SnapshotSandbox {
   windowSnapshot = {}
   modifiedMap = {}
+  proxy = window;
 
   constructor() {
   }

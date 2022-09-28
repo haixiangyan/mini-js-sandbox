@@ -5,7 +5,7 @@ describe('SnapshotSandbox', () => {
     delete window.value;
   })
 
-  it('可以激活环境', () => {
+  it('激活时可以恢复微应用环境', () => {
     const sandbox = new SnapshotSandbox();
 
     // 假设以前有一个旧值 value: 1
@@ -16,19 +16,19 @@ describe('SnapshotSandbox', () => {
     // 需要恢复 value: 1 -> window
     sandbox.active();
 
-    expect(window.value).toEqual(1);
+    expect(sandbox.proxy.value).toEqual(1);
   })
 
-  it('可以在失活时记录环境', () => {
+  it('失活时可以恢复以前 window 的环境', () => {
     const sandbox = new SnapshotSandbox();
 
     // 准备激活
-    window.value = 321;
+    sandbox.proxy.value = 321;
     sandbox.active();
     expect(sandbox.windowSnapshot.value).toEqual(321);
 
     // 准备失活
-    window.value = 123;
+    sandbox.proxy.value = 123;
     sandbox.inactive();
     expect(sandbox.modifiedMap.value).toEqual(123);
   })
